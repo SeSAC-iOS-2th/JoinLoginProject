@@ -37,7 +37,7 @@ class JoinViewController: UIViewController {
         return textField
     }()
     
-    let joinButton: UIButton = {
+    lazy var joinButton: UIButton = {
         let button = UIButton()
         button.setTitle("회원가입", for: .normal)
         button.setTitleColor(UIColor.blue, for: .normal)
@@ -45,8 +45,16 @@ class JoinViewController: UIViewController {
         button.layer.borderColor = UIColor.blue.cgColor
         button.layer.borderWidth = 2
         button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(joinButtonClicked), for: .touchUpInside)
         return button
     }()
+    
+    @objc func joinButtonClicked() {
+        let vc = LoginViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

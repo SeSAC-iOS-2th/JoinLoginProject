@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
         return textField
     }()
     
-    let loginButton: UIButton = {
+    lazy var loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("로그인", for: .normal)
         button.setTitleColor(UIColor.red, for: .normal)
@@ -36,8 +36,16 @@ class LoginViewController: UIViewController {
         button.layer.borderColor = UIColor.red.cgColor
         button.layer.borderWidth = 2
         button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(loginButtonClicked), for: .touchUpInside)
         return button
     }()
+    
+    @objc func loginButtonClicked() {
+        let vc = ProfileViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
