@@ -9,15 +9,7 @@ import UIKit
 import SnapKit
 
 class ProfileViewController: UIViewController {
-    
-    let logoutButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("로그아웃", for: .normal)
-        button.backgroundColor = .red
-        button.layer.cornerRadius = 6
-        return button
-    }()
-    
+        
     let userNameLabel: UILabel = {
         let label = UILabel()
         label.text = "이름"
@@ -44,6 +36,33 @@ class ProfileViewController: UIViewController {
         label.backgroundColor = .purple
         return label
     }()
+    
+    lazy var logoutButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("로그아웃", for: .normal)
+        button.backgroundColor = .red
+        button.layer.cornerRadius = 6
+        button.addTarget(self, action: #selector(logoutButtonClicked), for: .touchUpInside)
+        return button
+    }()
+
+    
+    @objc func logoutButtonClicked() {
+        let alert = UIAlertController(title: nil, message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "네", style: .default) { _ in
+            let vc = JoinViewController()
+            vc.modalTransitionStyle = .flipHorizontal
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
+        }
+        let no = UIAlertAction(title: "아니오", style: .cancel)
+        
+        alert.addAction(ok)
+        alert.addAction(no)
+        
+        present(alert, animated: true)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -41,10 +41,19 @@ class LoginViewController: UIViewController {
     }()
     
     @objc func loginButtonClicked() {
-        let vc = ProfileViewController()
-        vc.modalPresentationStyle = .fullScreen
-        vc.modalTransitionStyle = .crossDissolve
-        present(vc, animated: true)
+        let alert = UIAlertController(title: nil, message: "로그인 하시겠습니까?", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "네", style: .default) { _ in
+            let vc = ProfileViewController()
+            vc.modalPresentationStyle = .fullScreen
+            vc.modalTransitionStyle = .crossDissolve
+            self.present(vc, animated: true)
+        }
+        let no = UIAlertAction(title: "아니오", style: .cancel)
+        
+        alert.addAction(ok)
+        alert.addAction(no)
+        
+        present(alert, animated: true)
     }
     
     override func viewDidLoad() {
