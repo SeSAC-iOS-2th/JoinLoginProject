@@ -10,7 +10,9 @@ import SnapKit
 
 class JoinViewController: UIViewController {
     
-    let userNameTextField: UITextField = {
+    let api = APIService()
+    
+    let usernameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "이름을 입력하세요."
         textField.textAlignment = .center
@@ -52,6 +54,10 @@ class JoinViewController: UIViewController {
     @objc func joinButtonClicked() {
         let alert = UIAlertController(title: nil, message: "회원가입을 하시겠습니까?", preferredStyle: .alert)
         let ok = UIAlertAction(title: "네", style: .default) { _ in
+            
+            self.api.join(username: self.usernameTextField.text!, email: self.emailTextField.text!, password: self.passwordTextfield.text!)
+            print(self.usernameTextField.text!, self.emailTextField.text!, self.passwordTextfield.text!)
+            
             let vc = LoginViewController()
             vc.modalPresentationStyle = .fullScreen
             vc.modalTransitionStyle = .crossDissolve
@@ -73,20 +79,20 @@ class JoinViewController: UIViewController {
     }
     
     func setConfigure() {
-        [userNameTextField, emailTextField, passwordTextfield, joinButton].forEach {
+        [usernameTextField, emailTextField, passwordTextfield, joinButton].forEach {
             view.addSubview($0)
         }
     }
     
     func setConstraints() {
-        userNameTextField.snp.makeConstraints { make in
+        usernameTextField.snp.makeConstraints { make in
             make.top.equalTo(150)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(50)
             make.height.equalTo(50)
         }
         
         emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(userNameTextField.snp.bottom).offset(30)
+            make.top.equalTo(usernameTextField.snp.bottom).offset(30)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(50)
             make.height.equalTo(50)
         }

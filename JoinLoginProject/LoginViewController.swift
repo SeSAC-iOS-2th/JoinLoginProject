@@ -10,6 +10,8 @@ import SnapKit
 
 class LoginViewController: UIViewController {
     
+    let api = APIService()
+    
     let emailTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "이메일을 입력하세요."
@@ -43,6 +45,9 @@ class LoginViewController: UIViewController {
     @objc func loginButtonClicked() {
         let alert = UIAlertController(title: nil, message: "로그인 하시겠습니까?", preferredStyle: .alert)
         let ok = UIAlertAction(title: "네", style: .default) { _ in
+            
+            self.api.login(email: self.emailTextField.text!, password: self.passwordTextField.text!)
+            
             let vc = ProfileViewController()
             vc.modalPresentationStyle = .fullScreen
             vc.modalTransitionStyle = .crossDissolve

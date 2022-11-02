@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class ProfileViewController: UIViewController {
+    
+    let api = APIService()
         
     let userNameLabel: UILabel = {
         let label = UILabel()
@@ -50,6 +52,7 @@ class ProfileViewController: UIViewController {
     @objc func logoutButtonClicked() {
         let alert = UIAlertController(title: nil, message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
         let ok = UIAlertAction(title: "네", style: .default) { _ in
+            
             let vc = JoinViewController()
             vc.modalTransitionStyle = .flipHorizontal
             vc.modalPresentationStyle = .fullScreen
@@ -66,6 +69,8 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.api.profile()
         
         setConfigure()
         setConstraints()
